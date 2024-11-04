@@ -23,13 +23,13 @@ export function ModeToggle() {
   }
 
   return (
-    <div className="relative h-8 w-28 rounded-md bg-gray-400 p-1 dark:bg-gray-800">
+    <div className="relative h-6 w-20 rounded-md border border-gray-400 dark:border-none dark:bg-gray-800">
       <motion.div
-        className="absolute h-6 w-1/3 rounded-md bg-gray-500"
+        className="absolute h-6 w-1/3 rounded-md bg-gray-400 dark:bg-gray-500"
         animate={{
           left:
             toggleMode === "light"
-              ? "2px"
+              ? "0px"
               : toggleMode === "system"
                 ? "33.33%"
                 : "66.66%",
@@ -42,7 +42,9 @@ export function ModeToggle() {
             key={mode}
             onClick={() => handleToggle(mode)}
             className={`z-10 flex flex-1 items-center justify-center ${
-              toggleMode === mode ? "text-white" : "text-gray-300"
+              toggleMode === mode
+                ? "text-white"
+                : "text-gray-800 dark:text-gray-300"
             }`}
             aria-pressed={toggleMode === mode}
           >

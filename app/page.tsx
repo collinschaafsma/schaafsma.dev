@@ -1,9 +1,10 @@
+import { ModeToggle } from "./components/mode-toggle"
 import { Present } from "./components/present"
 import RollingText from "./components/rolling-text"
 
 export default function Home() {
   return (
-    <div className="mt-32 flex min-h-screen flex-col items-center">
+    <div className="relative flex min-h-screen flex-col items-center pt-32">
       <Present duration={1} y={20}>
         <h1 className="font-sans text-4xl md:text-6xl">Collin Schaafsma</h1>
       </Present>
@@ -24,6 +25,9 @@ export default function Home() {
           />
         </div>
       </Present>
+      <div className="absolute bottom-4 right-4">
+        <ModeToggle />
+      </div>
     </div>
   )
 }

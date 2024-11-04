@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
+import { ThemeProvider } from "next-themes"
 import "./globals.css"
 
 const outfitSans = localFont({
@@ -19,8 +20,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`${outfitSans.variable} antialiased`}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${outfitSans.variable} antialiased`}>
+        <ThemeProvider attribute="class">{children}</ThemeProvider>
+      </body>
     </html>
   )
 }

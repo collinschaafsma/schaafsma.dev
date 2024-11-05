@@ -15,12 +15,20 @@ export default function RollingText({
   const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex(prevIndex => (prevIndex + 1) % words.length)
-    }, interval)
+    if (!words.length) return
 
-    return () => clearInterval(timer)
-  }, [words.length, interval])
+    const updateIndex = () => {
+      setCurrentIndex(prevIndex => (prevIndex + 1) % words.length)
+    }
+
+    const timer = setInterval(updateIndex, interval)
+
+    updateIndex()
+
+    return () => {
+      clearInterval(timer)
+    }
+  }, [words.length, interval, words])
 
   return (
     <div className="relative inset-y-0 flex flex-grow overflow-hidden">

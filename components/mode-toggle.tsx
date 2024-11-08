@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { Computer, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
@@ -14,8 +14,20 @@ const modeIcons: Record<ToggleMode, React.ReactNode> = {
 }
 
 export function ModeToggle() {
-  const { setTheme } = useTheme()
-  const [toggleMode, setToggleMode] = useState<ToggleMode>("system")
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  const [toggleMode, setToggleMode] = useState<ToggleMode>(
+    (theme as ToggleMode) || "system"
+  )
+
+  // prevent hydration error
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
 
   const handleToggle = (mode: ToggleMode) => {
     setToggleMode(mode)
